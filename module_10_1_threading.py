@@ -26,7 +26,11 @@ args_ = [(10, 'example5.txt'),
          (100, 'example8.txt'),
          (200, 'example7.txt')]
 func = (threading.Thread(target=write_words, args=a) for a in args_)
+counter = 0
 for _ in count_time():
-    threading.current_thread().join()
     for thread in func:
+        counter +=1
         thread.start()
+        if counter == 4:
+            thread.join()
+
